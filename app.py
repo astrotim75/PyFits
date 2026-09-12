@@ -29,6 +29,8 @@ class MainWindow(QMainWindow):
         btn_open_file.setFixedSize(QSize(75, 50))
         btn_open_file.setIconSize(QSize(50, 25))
         btn_open_file.setToolTip("Open file")
+        btn_open_file.clicked.connect(self.get_file_name)
+        
 
         btn_display_fits_data.setIcon(QIcon("./Assets/fits_data.png"))
         btn_display_fits_data.setFixedSize(QSize(75, 50))
@@ -52,6 +54,21 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(central_widget)
 
         self.showMaximized()
+
+    def get_file_name(self):
+        filedialog = QFileDialog(self)
+        filedialog.setFileMode(QFileDialog.FileMode.ExistingFile)
+        filedialog.setWindowTitle("Select Fit(s) file")
+        filedialog.setNameFilter("FIT FILE (*.fit *.fits)")
+        filedialog.setViewMode(QFileDialog.ViewMode.List)
+
+        if filedialog.exec():
+            filename = filedialog.selectedFiles()[0]
+
+
+
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
